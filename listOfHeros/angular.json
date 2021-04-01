@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "listOfHeros"
+    }
+  },
+  "defaultProject": "listOfHeros",
+  "cli": {
+    "analytics": "e1a5ece5-c286-4c7e-b16d-2228b1b5b11f"
+  }
 }
