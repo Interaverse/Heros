@@ -20,19 +20,21 @@ export class HeroService {
     this.messageService.add(`HeroService: ${message}`);
   }
 
-  getHeroes(): Observable<Hero[]> {
-    const url = `${this.heroesUrl}/${id}`;
+  getHeroes() : Observable<Hero[]> {
     return this.http.get<Hero[]>(this.heroesUrl).pipe(
-      tap(_ => this.log('fetched heroes id=${id}')),
-      catchError(this.handleError<Hero[]>('getHeroes id=${id}', []))
+      tap(_ => this.log('fetched heroes')),
+      catchError(this.handleError<Hero[]>('getHeroes', []))
     );
     this.log(' fetched heroes');
   }
   getHero(id: number): Observable<Hero> {
-    const hero = HEROES.find(h => h.id === id) as Hero;
-    this.log(' fetched hero ${id}');
-    return of(hero);
+    const url = `${this.heroesUrl}/${id}`;
+    return this.http.get<Hero>(url).pipe(
+      tap(_ => this.log(`fetched hero id=${id}`)),
+      catchError(this.handleError<Hero>(`getHero id=${id}`))
+    );
   }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
